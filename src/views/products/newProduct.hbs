@@ -1,0 +1,56 @@
+<div class="container">
+    <h1>New Product</h1>
+    <hr>
+    <form method="POST" action="/addProduct">
+
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Name: </span>
+            </div>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Category: </span>
+            </div>
+            <select name="category" class="form-select px-1">
+                <option selected>Select one</option>
+                {{#each categories }}
+                <option value="{{category}}">{{category}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Description: </span>
+            </div>
+            <input type="text" class="form-control" name="description" required>
+        </div>
+
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Image Link: </span>
+            </div>
+            <input type="text" class="form-control" name="img" required>
+        </div>
+
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Price: </span>
+            </div>
+            <input type="number" class="form-control" name="price" required>
+        </div>
+
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Quantity: </span>
+            </div>
+            <input type="number" class="form-control" name="quantity" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-danger" href="/">Cancel</a>
+    </form>
+</div>
