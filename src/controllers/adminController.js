@@ -78,6 +78,23 @@ export const addCategory = async (req, res) => {
     res.redirect('/')
 }
 
+export const updateCategoryForm = async (req, res) => {
+    try{
+        const { id } = req.params;
+
+        if(id){
+            const docRef = await firestore.collection('categories').doc(id);
+        }
+        
+        res.render('categories/updateCategory')
+    }catch(err){
+        console.log(err.message);
+        res
+            .status(500)
+            .redirect('/');
+    }
+}
+
 export const deleteCategory = async (req, res) => {
     try{
         const { id } = req.params
@@ -118,6 +135,10 @@ export const addProduct = async (req, res) => {
         res.redirect('/')
     }
 
+}
+
+export const updateProductForm = async (req, res) => {
+    res.render('products/updateProduct');
 }
 
 export const deleteProduct = async (req, res) => {
