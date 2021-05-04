@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="container mt-4">
+        {{#if data}}
+         <form method="POST" action="/update-category">
+            <div class="form-group">
+                <label for="category">Id:</label>
+                <input type="text" class="form-control" disabled name="id" value={{ data.id }}>
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" class="form-control" placeholder="Update category..." name="category">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/" class="btn btn-danger">Cancel</a>
+        </form>
+        {{else}}
+        Ha ocurrido un error. 
+        {{/if}}
+    </div>
+</div>

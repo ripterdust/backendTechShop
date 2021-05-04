@@ -83,16 +83,32 @@ export const updateCategoryForm = async (req, res) => {
         const { id } = req.params;
 
         if(id){
-            const docRef = await firestore.collection('categories').doc(id);
+            const data = await firestore.collection('categories').doc(id).get();
+            
+            if(data){
+
+                const category = new Category(
+                    data.id,
+                    data.data().category
+                )
+
+                res.render('categories/updateCategory', {
+                    data: category
+                })
+            }
         }
         
-        res.render('categories/updateCategory')
+        
     }catch(err){
         console.log(err.message);
         res
             .status(500)
             .redirect('/');
     }
+}
+
+export const putCategory = async(req, res) => {
+    res.redirect('/')
 }
 
 export const deleteCategory = async (req, res) => {

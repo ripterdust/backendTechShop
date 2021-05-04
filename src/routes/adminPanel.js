@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addCategory, addProduct, deleteCategory, deleteProduct, mainPage, newCategory, newProduct, updateCategoryForm, updateProductForm } from '../controllers/adminController';
+import { addCategory, addProduct, deleteCategory, deleteProduct, mainPage, newCategory, newProduct, putCategory, updateCategoryForm, updateProductForm } from '../controllers/adminController';
 
 
 export const adminPanel = Router();
@@ -11,6 +11,7 @@ adminPanel
     .get('/delete-category/:id', deleteCategory)
     .get('/delete-product/:id', deleteProduct)
     .get('/edit-category/:id', updateCategoryForm)
+    .get('/put-category', putCategory)
     .get('/edit-product/:id', updateProductForm)
     .post('/addProduct', addProduct)
     .post('/addCategory', addCategory)
