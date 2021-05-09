@@ -108,6 +108,15 @@ export const updateCategoryForm = async (req, res) => {
 }
 
 export const putCategory = async(req, res) => {
+    const { id, category } = req.body;
+    try{
+        const data = await firestore.collection('categories').doc(id);
+        await data.update({category: category});
+        res.status(200)
+    } catch(err) {
+        console.log(err.message);
+        res.status(500)
+    }
     res.redirect('/')
 }
 
@@ -154,7 +163,35 @@ export const addProduct = async (req, res) => {
 }
 
 export const updateProductForm = async (req, res) => {
-    res.render('products/updateProduct');
+    try{
+        const { id } = req.params;
+
+        if(id){
+            const data = await firestore.collection('products').doc(id).get();
+            
+            if(data){
+                const product = new Product(
+                    data.id,
+                    data.data().name,
+                    data.data().category,
+                    data.data().price,
+                    data.data().quantity,
+                    data.data().img,
+                    data.data().description
+                );
+                res.render('products/updateProduct', {
+                    data: product
+                });
+            }
+        }
+        
+    }
+    catch(err){
+        console.log(err.message)
+        res
+            .status(500)
+            .redirect('/');
+    }
 }
 
 export const deleteProduct = async (req, res) => {
@@ -169,3 +206,23 @@ export const deleteProduct = async (req, res) => {
     
 }
 
+export const putProduct = async (req, res) => {
+    const {id, name, description, img, price, quantity} = req.body;
+
+    try{
+        const product = await firestore.collection('products').doc(id);
+        const data = {
+            name, 
+            description,
+            img,
+            price,
+            quantity
+        }
+        await product.update(data);
+
+    }catch(err){
+        console.log(err.message);
+        res.status(500);
+    }
+    res.redirect('/');
+}
